@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selvina Swarna | Cinematic Portfolio</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;600;800&family=Space+Grotesk:wght@300;500;700&family=Outfit:wght@100;400;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+    :root {
+        --bg: #020205;
+        --card-bg: rgba(13, 15, 28, 0.7);
+        --cyan: #00f2ff;
+        --purple: #9d50bb;
+        --pink: #f00b51;
+        --text-main: #ffffff;
+        --text-dim: #94a3b8;
+        --border: rgba(255, 255, 255, 0.1);
+        --neon-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
+        --nav-height: 80px; /* Standardized height */
+    }
+
+    /* --- RESET & BASE --- */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    html { scroll-behavior: smooth; }
+
+    body { 
+        background-color: var(--bg); 
+        color: var(--text-main); 
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        overflow-x: hidden;
+        line-height: 1.6;
+    }
+
+    /* --- LAYOUT UTILITIES --- */
+    .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px; /* Mobile safety padding */
+    }
+
+    /* --- VISUAL ENGINE (Background) --- */
+    .visual-engine, .grid-overlay {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+        pointer-events: none;
+    }
+    .visual-engine {
+        background: radial-gradient(circle at 20% 30%, rgba(157, 80, 187, 0.15), transparent 40%),
+                    radial-gradient(circle at 80% 70%, rgba(0, 242, 255, 0.15), transparent 40%);
+    }
+    .grid-overlay {
+        background-image: linear-gradient(var(--border) 1px, transparent 1px), 
+                          linear-gradient(90deg, var(--border) 1px, transparent 1px);
+        background-size: clamp(30px, 5vw, 60px) clamp(30px, 5vw, 60px);
+        mask-image: radial-gradient(circle at center, black, transparent 90%);
+        opacity: 0.2;
+    }
+
+    /* --- NAVIGATION --- */
+    nav {
+        position: fixed; top: 0; width: 100%; height: var(--nav-height); 
+        display: flex; align-items: center; z-index: 1000; 
+        background: rgba(2, 2, 5, 0.85); backdrop-filter: blur(15px);
+        border-bottom: 1px solid var(--border);
+    }
+    
+    .nav-container {
+        display: flex; justify-content: space-between; align-items: center; width: 100%;
+    }
+
+    .logo { font-family: 'Space Grotesk'; font-weight: 700; font-size: clamp(1.2rem, 4vw, 1.5rem); letter-spacing: -1px; }
+    .logo span { color: var(--cyan); text-shadow: var(--neon-shadow); }
+
+    .nav-links { display: flex; gap: clamp(15px, 3vw, 40px); }
+    .nav-links a { 
+        text-decoration: none; color: var(--text-dim); 
+        font-size: 0.75rem; font-weight: 600; letter-spacing: 1.5px; 
+        transition: 0.3s; text-transform: uppercase;
+    }
+    .nav-links a:hover { color: var(--cyan); text-shadow: var(--neon-shadow); }
+
+    /* --- HERO SECTION --- */
+    .hero-section {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-top: var(--nav-height);
+        position: relative;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        width: 100%;
+    }
+
+    /* --- RESPONSIVE BREAKPOINTS --- */
+    
+    /* --- COMPREHENSIVE MOBILE & TABLET OPTIMIZATION --- */
+@media (max-width: 768px) {
+    /* 1. Navigation Alignment */
+    .nav-container { flex-direction: column; padding: 10px 0; }
+    nav { height: auto; padding: 15px 0; }
+    .nav-links { margin-top: 15px; gap: 15px; flex-wrap: wrap; justify-content: center; }
+    .nav-links a { font-size: 0.7rem; letter-spacing: 1px; }
+
+    /* 2. Fix Hero Overlaps */
+    .hero-section { padding-top: 120px; min-height: auto; }
+    .floating-tag, .grid-overlay, .visual-engine {
+        z-index: -1 !important; /* Pushes background tags behind your text */
+        pointer-events: none;
+    }
+
+    /* 3. Force Project Vault Visibility */
+    #vault {
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        padding: 100px 0;
+        position: relative;
+        z-index: 5;
+    }
+
+    .project-grid {
+        display: flex !important;
+        flex-direction: column !important; /* Stacks projects vertically */
+        gap: 25px;
+        align-items: center;
+    }
+
+    /* 4. Professional Experience Alignment */
+    .experience-item {
+        flex-direction: column !important; /* Date on top of Job Title */
+        align-items: flex-start !important;
+        padding-left: 15px;
+        border-left: 2px solid var(--cyan);
+        margin-bottom: 30px;
+    }
+
+    .experience-date {
+        margin-bottom: 5px;
+        font-size: 0.8rem;
+        color: var(--cyan);
+    }
+
+    /* 5. General Spacing */
+    .container { padding: 0 20px; }
+}
+
+        /* === FLOATING BACKGROUND KEYWORDS === */
+
+.hero-bg-keywords {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-parallax-bg {
+  position: absolute;
+  font-family: 'Outfit';
+  font-weight: 900;
+  font-size: 15vw;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255,255,255,0.05);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* individual movements */
+.hero-parallax-bg.one {
+  top: 20%;
+  left: -40%;
+  animation: moveRight 40s linear infinite;
+}
+
+.hero-parallax-bg.two {
+  top: 55%;
+  right: -45%;
+  animation: moveLeft 45s linear infinite;
+}
+
+.hero-parallax-bg.three {
+  top: 75%;
+  left: -50%;
+  animation: moveRight 55s linear infinite;
+}
+        .hero { 
+            height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; position: relative; padding: 0 10%;
+        }
+        .hero-parallax-bg {
+            position: absolute; font-family: 'Outfit'; font-weight: 900; font-size: 15vw;
+            color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.05);
+            z-index: -1; white-space: nowrap; pointer-events: none;
+        }
+        .hero h1 {
+            font-family: 'Outfit'; font-size: clamp(3.5rem, 8vw, 7rem); font-weight: 900;
+            line-height: 1; margin-bottom: 20px; animation: float 5s ease-in-out infinite;
+        }
+        .hero h1 span {
+            background: linear-gradient(to right, var(--cyan), var(--purple));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .hero p { max-width: 700px; color: var(--text-dim); font-size: 1.2rem; margin-bottom: 40px; }
+        
+        .btn-main {
+            padding: 16px 40px; border-radius: 50px; background: transparent; color: var(--text-main);
+            border: 2px solid var(--cyan); font-weight: 700; font-size: 0.9rem; text-decoration: none;
+            transition: 0.4s; box-shadow: var(--neon-shadow); display: flex; align-items: center; gap: 10px;
+        }
+        .btn-main:hover { background: var(--cyan); color: #000; transform: scale(1.05); }
+
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+
+        /* --- MARQUEE --- */
+        .marquee {
+            border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: rgba(255,255,255,0.02); padding: 25px 0;
+            overflow: hidden; white-space: nowrap;
+        }
+        .marquee-inner { display: inline-block; animation: scroll 30s linear infinite; }
+        .marquee-inner span { 
+            font-family: 'Space Grotesk'; font-size: 1rem; color: var(--cyan); font-weight: 700;
+            margin-right: 60px; letter-spacing: 4px; text-transform: uppercase;
+        }
+        @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+        /* --- CONTENT SECTIONS --- */
+        section { padding: 120px 10%; position: relative; }
+        .sec-title { 
+    font-family: 'Outfit'; 
+    font-size: 3.5rem; 
+    font-weight: 900; 
+    margin-bottom: 60px;
+    display: flex; 
+    align-items: center; 
+    justify-content: center; /* This centers the text */
+    gap: 20px;
+    text-align: center;
+}
+
+/* This adds lines on BOTH sides of the centered text */
+.sec-title::before, .sec-title::after { 
+    content: ''; 
+    flex: 1; 
+    height: 1px; 
+    background: var(--border); 
+}
+.availability-status {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem;
+    color: var(--text-dim);
+    margin-top: -40px; 
+    margin-bottom: 40px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: center; /* Ensures the text stays centered under the heading */
+}
+
+.availability-status .highlight {
+    color: var(--cyan);
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
+}
+        /* --- NEW: EDUCATION SECTION --- */
+        .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
+        .edu-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+            border: 1px solid var(--border); padding: 40px; border-radius: 24px;
+            transition: 0.4s; position: relative;
+        }
+        .edu-card:hover { border-color: var(--cyan); transform: translateY(-10px); }
+        .edu-card h3 { font-family: 'Space Grotesk'; color: var(--cyan); margin-bottom: 10px; }
+        .edu-sub { color: #fff; font-weight: 600; margin-bottom: 15px; display: block; }
+        .edu-meta { color: var(--text-dim); font-size: 0.85rem; line-height: 1.6; }
+    
+
+        /* --- EXPERIENCE CARDS --- */
+        .exp-grid { display: flex; flex-direction: column; gap: 30px; }
+        .exp-card {
+            background: var(--card-bg); border: 1px solid var(--border); padding: 50px;
+            border-radius: 24px; transition: 0.4s; position: relative; overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        .exp-card:hover { border-color: var(--pink); transform: translateX(10px); }
+        .exp-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+            background: var(--pink); opacity: 0; transition: 0.3s;
+        }
+        .exp-card:hover::before { opacity: 1; }
+        .exp-header { display: flex; justify-content: space-between; margin-bottom: 25px; align-items: center; }
+        .exp-header h3 { font-size: 1.8rem; font-family: 'Space Grotesk'; color: var(--cyan); }
+        .exp-date { font-family: 'Space Grotesk'; font-size: 0.8rem; letter-spacing: 2px; color: var(--text-dim); }
+        .exp-list { list-style: none; }
+        .exp-list li { margin-bottom: 12px; color: var(--text-dim); position: relative; padding-left: 25px; }
+        .exp-list li::before { content: '→'; position: absolute; left: 0; color: var(--pink); }
+
+        /* --- PROJECT GRID --- */
+        .proj-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px; }
+        .p-card {
+    background: rgba(255, 255, 255, 0.03); /* Translucent background */
+    backdrop-filter: blur(12px);           /* The "Frosted" effect */
+    -webkit-backdrop-filter: blur(12px);   /* Support for Safari */
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+    border-radius: 16px;                   /* Smoother corners */
+    padding: 25px;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Hover effect to make it glow when you touch it */
+.p-card:hover {
+    border: 1px solid var(--cyan);
+    background: rgba(255, 255, 255, 0.06);
+    transform: translateY(-5px);
+}
+        .project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    padding: 12px 22px;
+    background: rgba(13, 15, 28, 0.4); 
+    border: 1px solid rgba(0, 242, 255, 0.3);
+    border-radius: 12px;
+    color: var(--cyan);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 2px;
+    transition: all 0.4s ease;
+    text-transform: uppercase;
+    backdrop-filter: blur(5px);
+}
+
+.project-link:hover {
+    background: var(--cyan);
+    color: #000; 
+    box-shadow: 0 0 20px rgba(0, 242, 255, 0.6);
+    border-color: var(--cyan);
+    transform: translateY(-3px);
+}
+        .p-card:hover { border-color: var(--cyan); box-shadow: 0 20px 50px rgba(0, 242, 255, 0.1); }
+        .p-label { color: var(--pink); font-family: 'Space Grotesk'; font-size: 0.7rem; letter-spacing: 3px; margin-bottom: 10px; display: block; }
+        .p-card h3 { font-size: 1.6rem; margin-bottom: 20px; color: var(--text-main); }
+        .p-content { margin-bottom: 25px; }
+        .p-content strong { color: var(--cyan); display: block; margin-top: 15px; font-size: 0.8rem; text-transform: uppercase; }
+        .p-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: auto; }
+        .tag { background: rgba(255,255,255,0.05); padding: 6px 15px; border-radius: 4px; font-size: 0.7rem; color: var(--text-dim); }
+
+        /* --- MODIFIED: TECHNICAL SKILLS --- */
+        .skills-section-wrapper {
+            background: radial-gradient(circle at 50% 50%, rgba(157, 80, 187, 0.05) 0%, transparent 70%);
+            padding: 20px; border-radius: 40px;
+        }
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
+        .skill-glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(0, 242, 255, 0.1);
+            padding: 35px;
+            border-radius: 24px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .skill-glass-card:hover {
+            transform: scale(1.02);
+            border-color: var(--cyan);
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
+        }
+        .skill-glass-card i {
+            font-size: 2rem; color: var(--cyan); margin-bottom: 20px; display: block;
+            text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
+        }
+        .skill-glass-card h4 {
+            font-family: 'Space Grotesk'; font-size: 1.2rem; color: #fff; margin-bottom: 18px;
+            letter-spacing: 1px;
+        }
+        .skill-list { display: flex; flex-wrap: wrap; gap: 10px; }
+        .skill-tag {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 6px 14px; border-radius: 8px; font-size: 0.75rem;
+            color: var(--text-dim); transition: 0.3s;
+        }
+        .skill-glass-card:hover .skill-tag { border-color: rgba(0, 242, 255, 0.3); color: #fff; }
+
+        /* --- MODIFIED: CERTIFICATIONS --- */
+        .certifications-section { margin-top: 100px; }
+        .certs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .cert-neon-card {
+            background: rgba(13, 15, 28, 0.6);
+            border: 1px solid var(--border);
+            padding: 30px; border-radius: 20px;
+            transition: 0.4s; position: relative;
+        }
+        .cert-neon-card:hover {
+            border-color: var(--pink);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(240, 11, 81, 0.2);
+        }
+        .cert-name { font-family: 'Space Grotesk'; font-size: 1.1rem; color: #fff; margin-bottom: 10px; line-height: 1.4; }
+        .cert-issuer { font-size: 0.75rem; color: var(--pink); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
+
+        /* --- MODIFIED: CONTACT SECTION --- */
+        .contact-content { max-width: 900px; margin: 0 auto; text-align: center; }
+        .modern-form {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            padding: 60px; border-radius: 35px;
+            display: grid; gap: 20px; text-align: left;
+            backdrop-filter: blur(10px); margin-bottom: 60px;
+        }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .input-group { display: flex; flex-direction: column; gap: 10px; }
+        .input-group label { font-family: 'Space Grotesk'; font-size: 0.7rem; color: var(--cyan); letter-spacing: 2px; font-weight: 700; }
+        .input-group input, .input-group textarea {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 12px; padding: 15px; color: #fff;
+            font-family: 'Plus Jakarta Sans'; transition: 0.3s;
+        }
+        .input-group input:focus, .input-group textarea:focus {
+            outline: none; border-color: var(--cyan); background: rgba(255, 255, 255, 0.08);
+        }
+        .submit-trigger {
+            background: transparent; border: 2px solid var(--cyan); color: #fff;
+            padding: 18px; border-radius: 12px; font-family: 'Space Grotesk';
+            font-weight: 700; letter-spacing: 2px; cursor: pointer; transition: 0.4s;
+            box-shadow: var(--neon-shadow); margin-top: 10px;
+        }
+        .submit-trigger:hover {
+            background: var(--cyan); color: #000; transform: scale(1.02);
+        }
+        .social-cluster { display: flex; justify-content: center; gap: 40px; }
+        .social-cluster a {
+            font-size: 2.5rem; color: var(--text-dim); transition: 0.4s;
+            filter: drop-shadow(0 0 0px var(--cyan));
+        }
+        .social-cluster a:hover {
+            color: var(--cyan); transform: scale(1.2);
+            filter: drop-shadow(0 0 10px var(--cyan));
+        }
+
+        footer { padding: 40px; text-align: center; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 0.7rem; letter-spacing: 2px; }
+
+        .reveal { opacity: 0; transform: translateY(50px); transition: 1s cubic-bezier(0.17, 0.67, 0.83, 0.67); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3.5rem; }
+            .proj-grid { grid-template-columns: 1fr; }
+            .form-grid { grid-template-columns: 1fr; }
+            .modern-form { padding: 30px; }
+            .social-cluster { gap: 25px; }
+        }
+        @keyframes moveRight {
+  from { transform: translateX(0); }
+  to { transform: translateX(160vw); }
+}
+
+@keyframes moveLeft {
+  from { transform: translateX(0); }
+  to { transform: translateX(-160vw); }
+}
+/* --- AMBIENT FLOATING TEXT --- */
+.ambient-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Allows you to click things behind the text */
+    z-index: 0;
+    overflow: hidden;
+}
+
+.floating-tag {
+    position: absolute;
+    padding: 8px 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    color: var(--text-dim);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    backdrop-filter: blur(5px);
+    animation: drift 20s linear infinite;
+    opacity: 0.6;
+}
+
+/* Position each tag uniquely */
+.tag-1 { top: 20%; left: 15%; animation-duration: 25s; }
+.tag-2 { top: 70%; left: 10%; animation-duration: 30s; animation-delay: -5s; }
+.tag-3 { top: 45%; right: 15%; animation-duration: 22s; animation-delay: -2s; }
+.tag-4 { top: 80%; right: 25%; animation-duration: 28s; animation-delay: -10s; }
+
+@keyframes drift {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    33% { transform: translate(30px, -50px) rotate(2deg); }
+    66% { transform: translate(-20px, 20px) rotate(-2deg); }
+    100% { transform: translate(0, 0) rotate(0deg); }
+}
+/* Starry Background Container */
+#star-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Keeps it behind your content */
+    background: radial-gradient(ellipse at bottom, #0d1d31 0%, #0c0d13 100%);
+    overflow: hidden;
+}
+
+/* Glitter Dots / Stars */
+.star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.5;
+    animation: twinkle var(--duration) infinite ease-in-out;
+}
+
+@keyframes twinkle {
+    0%, 100% { transform: scale(1); opacity: 0.3; }
+    50% { transform: scale(1.5); opacity: 1; text-shadow: 0 0 10px #fff; }
+}
+
+/* starFloat  */
+.glitter-dot {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: var(--cyan);
+    border-radius: 50%;
+    filter: blur(1px);
+    box-shadow: 0 0 10px var(--cyan);
+    animation: float 20s infinite linear;
+}
+
+@keyframes starfloat {
+    from { transform: translateY(100vh); }
+    to { transform: translateY(-10vh); }
+}
+/* Shooting Star Style */
+.shooting-star {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 4px;
+    height: 4px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1), 
+                0 0 0 8px rgba(255, 255, 255, 0.1), 
+                0 0 20px rgba(255, 255, 255, 1);
+    animation: shoot 3s linear infinite;
+    opacity: 0;
+}
+
+/* The trail effect */
+.shooting-star::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 150px;
+    height: 1px;
+    background: linear-gradient(90deg, #fff, transparent);
+}
+
+@keyframes shoot {
+    0% {
+        transform: rotate(315deg) translateX(0);
+        opacity: 1;
+    }
+    70% {
+        opacity: 1;
+    }
+    100% {
+        transform: rotate(315deg) translateX(-1000px);
+        opacity: 0;
+    }
+}
+/* Center the entire section content */
+.about-centered {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Make the "01. About Me" heading centered and larger */
+.centered-title {
+    justify-content: center;
+    font-size: 2.8rem; /* Bigger heading */
+    margin-bottom: 40px;
+    width: 100%;
+}
+
+.centered-title::after {
+    width: 150px; /* Shorter line for a centered look */
+}
+
+/* Adjust the Card to be centered and wide */
+.about-card {
+    max-width: 900px; /* Prevents the paragraph from stretching too wide */
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(0, 242, 255, 0.2);
+    border-radius: 24px;
+    padding: 50px;
+    transition: all 0.4s ease;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* Hover Effect: Glows Cyan when mouse is over the card */
+.about-card:hover {
+    border-color: var(--cyan);
+    box-shadow: 0 0 40px rgba(0, 242, 255, 0.15);
+    transform: scale(1.02); /* Slight pop-out effect */
+}
+
+/* Big Font Style for the Paragraph */
+.about-card p {
+    font-size: 1.4rem; /* Significantly larger font */
+    line-height: 1.9;
+    color: #e0e0e0;
+    font-family: 'Space Grotesk', sans-serif;
+    text-align: center; /* Centers the text inside the card */
+}
+
+.highlight {
+    color: var(--cyan);
+    font-weight: 600;
+}
+.marquee-container {
+    width: 100%;
+    overflow: hidden;
+    padding: 30px 0;
+    background: rgba(255, 255, 255, 0.02);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    white-space: nowrap;
+    position: relative;
+}
+
+/* Create the fade-out effect at the edges */
+.marquee-container::before, .marquee-container::after {
+    content: "";
+    position: absolute;
+    top: 0; width: 150px; height: 100%; z-index: 2;
+}
+.marquee-container::before { left: 0; background: linear-gradient(to right, var(--bg), transparent); }
+.marquee-container::after { right: 0; background: linear-gradient(to left, var(--bg), transparent); }
+
+.marquee-content {
+    display: inline-block;
+    animation: marquee-scroll 40s linear infinite;
+}
+
+.m-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    margin: 0 50px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.m-item i {
+    color: var(--cyan);
+    font-size: 1.5rem;
+    filter: drop-shadow(0 0 8px var(--cyan));
+}
+
+@keyframes marquee-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+/* Slow down on hover for better readability */
+.marquee-container:hover .marquee-content {
+    animation-play-state: paused;
+}
+
+    </style>
+</head>
+<body>
+<div id="star-container">
+    <div class="star" style="top: 10%; left: 20%; width: 2px; height: 2px; --duration: 3s;"></div>
+    <div class="star" style="top: 30%; left: 80%; width: 1px; height: 1px; --duration: 5s;"></div>
+    <div class="star" style="top: 70%; left: 40%; width: 2px; height: 2px; --duration: 4s;"></div>
+    <div class="star" style="top: 50%; left: 10%; width: 1px; height: 1px; --duration: 7s;"></div>
+    <div class="star" style="top: 90%; left: 90%; width: 2px; height: 2px; --duration: 2s;"></div>
+    
+    <div class="glitter-dot" style="left: 15%; animation-delay: 0s;"></div>
+    <div class="glitter-dot" style="left: 45%; animation-delay: 5s;"></div>
+    <div class="glitter-dot" style="left: 75%; animation-delay: 10s;"></div>
+</div>
+    <div class="visual-engine"></div>
+    <div class="grid-overlay"></div>
+    <div class="ambient-layer">
+    <div class="floating-tag tag-1">Risk & GRC</div>
+    <div class="floating-tag tag-2">Data Analytics</div>
+    <div class="floating-tag tag-3">Penetration Testing</div>
+    <div class="floating-tag tag-4">Information Security</div>
+</div>
+   <nav>
+    <div class="container nav-container">
+        <div class="logo">SELVINA<span>.SWARNA</span></div>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#Education">Education</a>
+            <a href="#Experience">Experience</a>
+            <a href="#vault">Project Vault</a>
+            <a href="#Certifications">Certifications</a>
+            <a href="#Technical Stack">Technical Stack</a> 
+            <a href="#Contact">Contact</a>
+
+        </div>
+    </div>
+</nav>
+
+    
+    <div class="hero-bg-keywords">
+  <span class="bg-keyword">Risk & GRC</span>
+  <span class="bg-keyword">Data Analytics</span>
+  <span class="bg-keyword">Information Security</span>
+</div>
+    <header class="hero">
+        <div class="hero-parallax-bg" id="parallax-text">CYBER SECURITY DATA ANALYTICS</div>
+        <span class="p-label" style="font-size: 1rem; margin-bottom: 20px;">SECURITY & DATA ANALYST</span>
+        <h1>Securing Data <br><span>Informing Decisions </span></h1>
+        <p>Bridging the gap between technical cybersecurity defense and strategic business intelligence.</p>
+        <a href="Selvina_Swarna_Resume.pdf" class="btn-main" download>
+            <i class="fas fa-cloud-download-alt"></i> DOWNLOAD ACCESS CARD (RESUME)
+        </a>
+    </header>
+
+    <div class="marquee-container">
+    <div class="marquee-content">
+        <span class="m-item"><i class="fas fa-shield-alt"></i> Risk Management</span>
+        <span class="m-item"><i class="fab fa-python"></i> Python</span>
+        <span class="m-item"><i class="fas fa-file-contract"></i> NIST Framework</span>
+        <span class="m-item"><i class="fas fa-database"></i> SQL</span>
+        <span class="m-item"><i class="fas fa-chart-bar"></i> Power BI</span>
+        <span class="m-item"><i class="fas fa-user-secret"></i> Ethical Hacking</span>
+        <span class="m-item"><i class="fab fa-linux"></i> Kali Linux</span>
+        <span class="m-item"><i class="fas fa-chart-pie"></i> Tableau</span>
+        
+
+        <span class="m-item"><i class="fas fa-shield-alt"></i> Risk Management</span>
+        <span class="m-item"><i class="fab fa-python"></i> Python</span>
+        <span class="m-item"><i class="fas fa-file-contract"></i> NIST Framework</span>
+        <span class="m-item"><i class="fas fa-database"></i> SQL</span>
+        <span class="m-item"><i class="fas fa-chart-bar"></i> Power BI</span>
+        <span class="m-item"><i class="fas fa-user-secret"></i> Ethical Hacking</span>
+        <span class="m-item"><i class="fab fa-linux"></i> Kali Linux</span>
+        <span class="m-item"><i class="fas fa-chart-pie"></i> Tableau</span>
+        
+    </div>
+</div>
+
+    <section id="about" class="about-section reveal">
+    <div class="container about-centered">
+        <h2 class="section-title centered-title"> About Me</h2>
+        
+        <div class="about-content-wrapper">
+            <div class="about-card interactive-glow">
+                <p>
+                    Hello! I'm <span class="highlight">Selvina</span>, a Graduate student at 
+                    <strong>Syracuse University</strong> with a passion for bridging the gap between 
+                    complex data and secure systems. Starting my journey in India with a foundation 
+                    in Cybersecurity, I have since evolved into a specialist in <strong>Information Systems</strong>. 
+                    I focus on building AI-driven security solutions and interactive data visualizations 
+                    that ensure intelligent systems remain resilient, accessible, and transparent.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <section id="Education" class="reveal">
+    <h2 class="sec-title"><span class="sec-num"></span> Education Hub</h2>
+    <div class="edu-grid">
+        <div class="edu-card">
+            <h3>Master of Science, Information Systems</h3>
+            <span class="edu-sub">Syracuse University, School of Information Studies </span>
+            <p class="edu-meta">
+                <strong>Timeline:</strong> Expected May 2026 <br>
+                <strong>Core Coursework:</strong> Data Science, Business Analytics, Information Security, and Applied Machine Learning
+            </p>
+        </div>
+        <div class="edu-card">
+            <h3>Bachelor of Science, Computer Science and Cybersecurity</h3>
+            <span class="edu-sub">Mumbai University, AP Shah Institute of Technology </span>
+            <p class="edu-meta">
+                <strong>Timeline:</strong> Completed May 2024 <br>
+                <strong>Core Coursework:</strong> Cloud Computing, Computer Networks, AI, and Operating Systems
+            </p>
+        </div>
+    </div>
+</section>
+
+    <section id="Experience" class="reveal">
+        <h2 class="sec-title"><span class="sec-num"></span> Professional Records</h2>
+        <div class="exp-grid">
+            <div class="exp-card">
+                <div class="exp-header">
+                    <h3>Information Security Analyst</h3>
+                    <span class="exp-date">Jan 2026 — Present | Orion Secure</span>
+                </div>
+                <ul class="exp-list">
+                    <li>Manage enterprise risk registers and comprehensive governance documentation.</li>
+                    <li>Analyze vulnerability results and penetration testing data to prioritize remediation.</li>
+                    <li>Translate high-level technical findings into business-aligned security insights for stakeholders.</li>
+                    <li>Conduct control mappings and maintain compliance documentation across hybrid environments.</li>
+                </ul>
+            </div>
+            <div class="exp-card">
+                <div class="exp-header">
+                    <h3>Content Developer</h3>
+                    <span class="exp-date">Nov 2025 — Present | Burton Blatt Institute (BBI)</span>
+                </div>
+                <ul class="exp-list">
+                    <li>Produce high-quality visual and technical content for research dissemination and policy updates.</li>
+                    <li>Design accessible communication materials and infographics for diverse audiences.</li>
+                    <li>Collaborate with cross-functional research teams to ensure clarity, consistency, and compliance with accessibility standards.</li>
+                </ul>
+            </div>
+            <div class="exp-card">
+                <div class="exp-header">
+                    <h3>Cybersecurity & Info Governance Intern</h3>
+                    <span class="exp-date">Aug 2025 — Jan 2026 | Orion Secure</span>
+                </div>
+                <ul class="exp-list">
+                    <li>Executed targeted penetration testing and vulnerability assessments to identify infrastructure gaps.</li>
+                    <li>Assisted in the development of information governance policies and formal compliance documentation.</li>
+                    <li>Monitored security incidents and validated the effectiveness of system controls.</li>
+                </ul>
+            </div>
+            <div class="exp-card">
+                <div class="exp-header">
+                    <h3>Teaching Assistant – Cybersecurity</h3>
+                    <span class="exp-date">Jun 2025 — Aug 2025 | Syracuse University</span>
+                </div>
+                <ul class="exp-list">
+                    <li>Supported instruction for courses on ethical hacking, penetration testing, and core security fundamentals.</li>
+                    <li>Guided student teams during intensive cybersecurity hackathons and lab simulations.</li>
+                    <li>Evaluated lab performance and provided technical mentoring for complex security configurations.</li>
+                </ul>
+            </div>
+            <div class="exp-card">
+                <div class="exp-header">
+                    <h3>Content Data Analyst Intern</h3>
+                    <span class="exp-date">Nov 2023 — Jan 2024 | QuoDeck Technologies</span>
+                </div>
+                <ul class="exp-list">
+                    <li>Processed and analyzed datasets exceeding 250,000 rows to support data-driven product strategy.</li>
+                    <li>Engineered interactive dashboards in Power BI and Tableau for KPI tracking.</li>
+                    <li>Automated recurring reporting cycles using advanced Excel techniques, improving data usability by 30%.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="vault" class="reveal">
+        <h2 class="sec-title"><span class="sec-num"></span> Project Vault</h2>
+        <div class="proj-grid">
+            <div class="p-card">
+                <span class="p-label">SECURITY INTELLIGENCE</span>
+                <h3>CyberPulse Dashboard</h3>
+                <div class="p-content">
+                    <strong>Problem</strong> Monitoring fragmented security events across multiple IPs and detecting phishing threats manually is inefficient.
+                    <strong>Solution</strong> Built an interactive dashboard with AbuseIPDB enrichment, ML-based anomaly detection, and NLP phishing analysis.
+                    <strong>Outcome</strong> Automated threat intelligence visualization with real-time risk categorization and reporting.
+                </div>
+            <a href="https://github.com/selvina123/cyberpulse-dashboard" target="_blank" class="project-link">
+            <i class="fab fa-github"></i> VIEW SOURCE CODE
+            </a>
+          
+                <div class="p-tags"><span class="tag">Python</span><span class="tag">Streamlit</span><span class="tag">Scikit-learn</span><span class="tag">HuggingFace</span></div>
+            </div>
+            <div class="p-card">
+                <span class="p-label">DATA VISUALIZATION</span>
+                <h3>ECS Energy Forecaster</h3>
+                <div class="p-content">
+                    <strong>Problem</strong> Managing energy consumption across 5,000+ buildings without centralized forecasting tools.
+                    <strong>Solution</strong> Integrated multi-source .parquet datasets with Arrow and R Shiny to build a predictive dashboard.
+                    <strong>Outcome</strong> Delivered real-time visual analytics and predictive modeling for large-scale energy insights.
+                </div>
+                <div class="p-tags"><span class="tag">R Language</span><span class="tag">Shiny</span><span class="tag">ggplot2</span><span class="tag">Arrow</span></div>
+            </div>
+            <div class="p-card">
+                <span class="p-label">FULL-STACK WEB DEVELOPMENT</span>
+                <h3>Helping Hands: NGO Web App</h3>
+                <div class="p-content">
+                    <strong>Problem</strong> Fragmented communication between volunteers and NGOs hindered community impact initiatives.
+                    <strong>Solution</strong> Full-stack platform enabling posts, comments, certifications, and automated NGO recommendations.
+                    <strong>Outcome</strong> Centralized volunteer engagement with a modern social-inspired communication framework.
+                </div>
+                <div class="p-tags"><span class="tag">Web Dev</span><span class="tag">HTML5/CSS</span><span class="tag">MySQL</span></div>
+            </div>
+            <div class="p-card">
+                <span class="p-label">MACHINE LEARNING</span>
+                <h3>LiteHealth Predictor</h3>
+                <div class="p-content">
+                    <strong>Problem</strong> Difficulty in obtaining quick, symptom-based disease risk assessments for users.
+                    <strong>Solution</strong> ML-based diagnostic tool using Decision Trees and Random Forest models built in Python.
+                    <strong>Outcome</strong> Enabled users to receive reliable, symptom-driven health predictions via a compact ML system.
+                </div>
+            <a href="https://github.com/selvina123/DiseasePredictionSystem-Selvina" target="_blank" class="project-link">
+            <i class="fab fa-github"></i> VIEW SOURCE CODE
+            </a>
+                <div class="p-tags"><span class="tag">Python</span><span class="tag">Random Forest</span><span class="tag">Pandas</span></div>
+            </div>
+            <div class="p-card">
+                <span class="p-label">DATABASE MANAGEMENT</span>
+                <h3>WorkforceHub Solution</h3>
+                <div class="p-content">
+                    <strong>Problem</strong> Manual employee data management leads to compliance errors and onboarding delays.
+                    <strong>Solution</strong> Desktop management application for end-to-end data lifecycle from onboarding to compliance tracking.
+                    <strong>Outcome</strong> Streamlined HR operations with centralized leave, performance, and reporting systems.
+                </div>
+                <div class="p-tags"><span class="tag">MySQL</span><span class="tag">Databases</span><span class="tag">Management</span></div>
+            </div>
+            <div class="p-card">
+                <span class="p-label">WEB APPLICATION </span>
+                <h3>E-Learning Python Portal</h3>
+                <div class="p-content">
+                    <strong>Problem</strong> Remote learning barriers for children during COVID-19 required interactive educational tools.
+                    <strong>Solution</strong> Interactive Django-based portal featuring structured lessons and real-time coding quizzes.
+                    <strong>Outcome</strong> Fostered engaging, secure educational environments for remote learners.
+                </div>
+                <div class="p-tags"><span class="tag">Django</span><span class="tag">Python</span><span class="tag">Education</span></div>
+            </div>
+            <div class="p-card">
+                <span class="p-label">MANAGEMENT SYSTEM</span>
+                <h3>Pharma Manager System</h3>
+                <div class="p-content">
+                    <strong>Problem</strong> Manual prescription and inventory tracking in pharmacies caused high error rates.
+                    <strong>Solution</strong> Java-based management system for secure inventory, patient, and prescription tracking.
+                    <strong>Outcome</strong> Improved operational accuracy and data security for pharmaceutical inventory management.
+                </div>
+                <div class="p-tags"><span class="tag">Java</span><span class="tag">NetBeans</span><span class="tag">SQL</span></div>
+            </div>
+            <div class="p-card">
+    <span class="p-label">SOFTWARE ENGINEERING</span>
+    <h3>Stock Management System</h3>
+    <div class="p-content">
+        <strong> Problem:</strong> Manual inventory tracking often leads to data inconsistencies and delays in procurement workflows.
+        <strong> Solution:</strong> A centralized desktop application featuring real-time stock monitoring and automated sales reporting.
+        <strong> Outcome:</strong> Improved data integrity and supply chain efficiency through a robust MySQL database architecture.
+    </div>
+    
+    <a href="https://github.com/selvina123/Stock-Management-System-selvina123" target="_blank" class="project-link">
+        <i class="fab fa-github"></i> VIEW SOURCE CODE
+    </a>
+
+    <div class="p-tags">
+        <span class="tag">Java</span>
+        <span class="tag">MySQL</span>
+        <span class="tag">Database Design</span>
+    </div>
+</div>
+    <div class="p-card">
+    <span class="p-label">AI & MACHINE LEARNING</span>
+    <h3>AI Job Guard: Real vs Fake Detector</h3>
+    <div class="p-content">
+        <strong> Problem:</strong> The rise of fraudulent job postings targeting job seekers and compromising sensitive personal data.
+        <strong> Solution:</strong> A Streamlit app using Logistic Regression and TF-IDF to analyze job descriptions for scams.
+        <strong> Outcome:</strong> High-accuracy classification featuring animated confidence visualizations, pastel-neon UI, and accessibility-friendly audio alerts.
+    </div>
+    
+    <a href="https://github.com/selvina123/real-time-fake-job-detector" target="_blank" class="project-link">
+        <i class="fab fa-github"></i> VIEW SOURCE CODE
+    </a>
+
+    <div class="p-tags">
+        <span class="tag">Python</span>
+        <span class="tag">Scikit-Learn</span>
+        <span class="tag">NLP</span>
+        <span class="tag">Streamlit</span>
+    </div>
+</div>
+     <div class="p-card">
+    <span class="p-label">EXPLAINABLE AI & ML</span>
+    <h3>ModelGuard: Fraud Detection System</h3>
+    <div class="p-content">
+        <strong> Problem:</strong> Financial institutions face billions in losses due to undetected fraudulent credit card transactions.
+        <strong> Solution:</strong> An end-to-end ML pipeline using XGBoost for binary classification and SHAP for model interpretability.
+        <strong> Outcome:</strong> A transparent security dashboard that not only detects fraud but explains the specific risk factors behind every decision.
+    </div>
+    
+    <a href="https://github.com/selvina123/modelguard-fraud-detection" target="_blank" class="project-link">
+        <i class="fab fa-github"></i> VIEW SOURCE CODE
+    </a>
+
+    <div class="p-tags">
+        <span class="tag">XGBoost</span>
+        <span class="tag">SHAP</span>
+        <span class="tag">Python</span>
+        <span class="tag">Streamlit</span>
+    </div>
+</div>
+    <div class="p-card">
+    <span class="p-label">DATA SCIENCE & DEEP LEARNING</span>
+    <h3>Housing Market Analysis & Prediction</h3>
+    <div class="p-content">
+        <strong> Problem:</strong> Complexity in predicting real estate trends due to fluctuating inventory and economic indicators.
+        <strong> Solution:</strong> An end-to-end pipeline comparing Regression, Tree-based ensembles (XGBoost, LightGBM), and LSTM Neural Networks for time-series forecasting.
+        <strong> Outcome:</strong> A transparent, interactive dashboard featuring SHAP explainability to identify key drivers of market value.
+    </div>
+    
+    <a href="https://github.com/selvina123/Housing-market-analysis" target="_blank" class="project-link">
+        <i class="fab fa-github"></i> VIEW SOURCE CODE
+    </a>
+
+    <div class="p-tags">
+        <span class="tag">TensorFlow (LSTM)</span>
+        <span class="tag">XGBoost</span>
+        <span class="tag">SHAP</span>
+        <span class="tag">Scikit-learn</span>
+    </div>
+</div>
+    <div class="p-card">
+    <span class="p-label">DATA VISUALIZATION & BI</span>
+    <h3>F1 Performance Analytics Dashboard</h3>
+    <div class="p-content">
+        <strong> Problem:</strong> Identifying trends across decades of Formula 1 racing data involving complex driver, team, and circuit variables.
+        <strong> Solution:</strong> An interactive Tableau suite utilizing data blending and calculated fields to track constructor dominance and circuit difficulty.
+        <strong> Outcome:</strong> High-impact visual intelligence mapping grid-to-finish position changes and DNF patterns across global circuits.
+    </div>
+    
+    <a href="https://github.com/selvina123/F1-Performance-Tableau-Dashboard" target="_blank" class="project-link">
+        <i class="fab fa-github"></i> VIEW SOURCE CODE
+    </a>
+
+    <div class="p-tags">
+        <span class="tag">Tableau</span>
+        <span class="tag">Data Blending</span>
+        <span class="tag">BI Dashboards</span>
+        <span class="tag">Analytics</span>
+    </div>
+</div>
+    <div class="p-card">
+    <span class="p-label">STATISTICAL ANALYSIS & EDA</span>
+    <h3>US Health Insurance Analytics</h3>
+    <div class="p-content">
+        <strong> Problem:</strong> Deciphering the primary drivers of medical insurance premiums in a complex demographic landscape.
+        <strong> Solution:</strong> An in-depth Exploratory Data Analysis (EDA) using Seaborn and Matplotlib to isolate lifestyle variables like BMI and smoking status.
+        <strong> Outcome:</strong> Identified smoking as the #1 predictor of cost, providing a data-backed foundation for insurance risk assessment.
+    </div>
+    
+    <a href="https://github.com/selvina123/US-Health-Insurance-EDA" target="_blank" class="project-link">
+        <i class="fab fa-github"></i> VIEW SOURCE CODE
+    </a>
+
+    <div class="p-tags">
+        <span class="tag">Python</span>
+        <span class="tag">Pandas</span>
+        <span class="tag">Data Visualization</span>
+        <span class="tag">Statistics</span>
+    </div>
+</div>
+        </div>
+    </section>
+
+    <section id="Technical Stack" class="reveal">
+        <h2 class="sec-title"><span class="sec-num"></span> Technical Arsenal</h2>
+        <div class="skills-section-wrapper">
+            <div class="skills-grid">
+                <div class="skill-glass-card">
+                    <i class="fas fa-shield-halved"></i>
+                    <h4>Cybersecurity & GRC</h4>
+                    <div class="skill-list">
+                        <span class="skill-tag">NIST Framework</span>
+                        <span class="skill-tag">Risk Management</span>
+                        <span class="skill-tag">Governance & Compliance</span>
+                        <span class="skill-tag">Information Security</span>
+                        <span class="skill-tag">Threat Intelligence</span>
+                        <span class="skill-tag">Control Mapping</span>
+                    </div>
+                </div>
+
+                <div class="skill-glass-card">
+                    <i class="fas fa-user-secret"></i>
+                    <h4>Vulnerability Assessment & Pen Testing</h4>
+                    <div class="skill-list">
+                        <span class="skill-tag">Ethical Hacking</span>
+                        <span class="skill-tag">Kali Linux</span>
+                        <span class="skill-tag">Nmap</span>
+                        <span class="skill-tag">Metasploit</span>
+                        <span class="skill-tag">Burp Suite</span>
+                        <span class="skill-tag">Network Security</span>
+                    </div>
+                </div>
+
+                <div class="skill-glass-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h4>Data Analytics & Visualization</h4>
+                    <div class="skill-list">
+                        <span class="skill-tag">Tableau</span>
+                        <span class="skill-tag">Power BI</span>
+                        <span class="skill-tag">Advanced Excel</span>
+                        <span class="skill-tag">Statistical Analysis</span>
+                        <span class="skill-tag">Data Cleaning</span>
+                        <span class="skill-tag">Exploratory Data Analysis</span>
+                    </div>
+                </div>
+
+                <div class="skill-glass-card">
+                    <i class="fas fa-code"></i>
+                    <h4>Programming & Scripting</h4>
+                    <div class="skill-list">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">R Language</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">PHP</span>
+                        <span class="skill-tag">GO</span>
+                        <span class="skill-tag">HTML5</span>
+                        <span class="skill-tag">CSS3</span>
+                        
+                        
+                    </div>
+                </div>
+
+                <div class="skill-glass-card">
+                    <i class="fas fa-cloud"></i>
+                    <h4>Cloud & Platforms</h4>
+                    <div class="skill-list">
+                        <span class="skill-tag">AWS</span>
+                        <span class="skill-tag">Google Cloud Platform</span>
+                        <span class="skill-tag">Linux Systems</span>
+                        <span class="skill-tag">Virtualization</span>
+                        <span class="skill-tag">Windows Server</span>
+                    </div>
+                </div>
+
+                <div class="skill-glass-card">
+                    <i class="fas fa-layer-group"></i>
+                    <h4>Frameworks, Tools & Databases</h4>
+                    <div class="skill-list">
+                        <span class="skill-tag">MySQL</span>
+                        <span class="skill-tag">Django</span>
+                        <span class="skill-tag">GitHub/Git</span>
+                        <span class="skill-tag">Streamlit</span>
+                        <span class="skill-tag">PostgreSQL</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="Certifications" class="reveal certifications-section">
+        <h2 class="sec-title"><span class="sec-num"></span> Certifications</h2>
+        <div class="certs-grid">
+            <div class="cert-neon-card">
+                <div class="cert-name">Google Data Analytics Professional Certificate</div>
+                <div class="cert-issuer">Google</div>
+            </div>
+            <div class="cert-neon-card">
+                <div class="cert-name">Generative AI Fundamentals</div>
+                <div class="cert-issuer">Google Cloud </div>
+            </div>
+            <div class="cert-neon-card">
+                <div class="cert-name">Ethical Hacking with Kali Linux</div>
+                <div class="cert-issuer">IBM</div>
+            </div>
+            <div class="cert-neon-card">
+                <div class="cert-name">Doing More with Google Sheets</div>
+                <div class="cert-issuer">Google</div>
+            </div>
+            <div class="cert-neon-card">
+                <div class="cert-name">Exploitation and Penetration Testing with Metasploit</div>
+                <div class="cert-issuer">IBM</div>
+            </div>
+            <div class="cert-neon-card">
+                <div class="cert-name">Introduction to Computers and Operating Systems and Security</div>
+                <div class="cert-issuer">Microsoft</div>
+            </div>
+            <div class="cert-neon-card">
+                <div class="cert-name">Foundations of Cybersecurity</div>
+                <div class="cert-issuer">Google</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="Contact" class="reveal">
+    <div class="contact-content">
+        <h2 class="sec-title" style="justify-content: center;"><span class="sec-num"></span> Let's Connect</h2>
+        <p class="availability-status">
+            Currently open for <span class="highlight">2026 Full-Time Opportunities</span> in Security & Data roles
+        </p>
+        
+        <form class="modern-form" action="https://formspree.io/f/xdaaaznq" method="POST">
+            <div class="form-grid">
+                <div class="input-group">
+                    <label>FULL NAME</label>
+                    <input type="text" name="name" placeholder="Enter your name" required>
+                </div>
+                <div class="input-group">
+                    <label>EMAIL ADDRESS</label>
+                    <input type="email" name="email" placeholder="example@email.com" required>
+                </div>
+            </div>
+            <div class="input-group">
+                <label>MESSAGE / DESCRIPTION</label>
+                <textarea name="message" rows="6" placeholder= required></textarea>
+            </div>
+            
+            <button type="submit" class="submit-trigger">INITIATE TRANSMISSION</button>
+        </form>
+
+        <div class="social-cluster">
+            <a href="mailto:smswarna@syr.edu" title="Email"><i class="fas fa-envelope"></i></a>
+            <a href="https://linkedin.com/in/selvina-swarna" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/selvina123" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+        </div>
+    </div>
+</section>
+    <footer>
+        © 2026 SELVINA SWARNA | Security. Data. Impact | BUILT FOR THE FUTURE
+    </footer>
+
+    <script>
+        // Reveal on Scroll Engine
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Parallax Effect
+        window.addEventListener('scroll', () => {
+            const scrollVal = window.scrollY;
+            const parallaxText = document.getElementById('parallax-text');
+            if(parallaxText) {
+                parallaxText.style.transform = `translateX(${scrollVal * 0.5}px)`;
+            }
+        });
+
+        // 3D Tilt Logic for Project Cards
+        document.querySelectorAll('.p-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 10;
+                const rotateY = (centerX - x) / 10;
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0) rotateY(0)`;
+            });
+        });
+    </script>
+    <script>
+    // Create the glow element
+    const glow = document.createElement('div');
+    glow.className = 'cursor-glow';
+    document.body.appendChild(glow);
+
+    // Make it follow the mouse
+    document.addEventListener('mousemove', (e) => {
+        glow.style.left = e.clientX + 'px';
+        glow.style.top = e.clientY + 'px';
+    });
+
+    // Hide it when the mouse leaves the window
+    document.addEventListener('mouseleave', () => {
+        glow.style.opacity = '0';
+    });
+    
+    document.addEventListener('mouseenter', () => {
+        glow.style.opacity = '1';
+    });
+</script>
+</body>
+</html>
