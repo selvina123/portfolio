@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Selvina Swarna | Portfolio</title>
+    <title>Selvina Swarna | Cinematic Portfolio</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;600;800&family=Space+Grotesk:wght@300;500;700&family=Outfit:wght@100;400;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -892,6 +892,114 @@ nav {
         line-height: 1.6;
     }
 }
+/* --- GLOBAL RESPONSIVE REFACTOR --- */
+
+/* 1. Critical Heading Scaling */
+h1 { font-size: clamp(2.2rem, 8vw, 4.5rem) !important; line-height: 1.1; }
+h2 { font-size: clamp(1.8rem, 5vw, 3rem) !important; }
+.hero-content p { font-size: clamp(0.9rem, 2vw, 1.1rem); max-width: 600px; margin: 0 auto; }
+
+/* 2. Top-Right Hamburger Fix */
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    width: 100%;
+}
+
+.menu-toggle {
+    display: none;
+    position: fixed; /* Ensures it stays top-right regardless of scroll */
+    top: 25px;
+    right: 25px;
+    z-index: 2000;
+    flex-direction: column;
+    gap: 6px;
+    background: none;
+    border: none;
+}
+
+.menu-toggle span {
+    width: 30px;
+    height: 2px;
+    background: var(--cyan);
+    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (max-width: 768px) {
+    .menu-toggle { display: flex; }
+    
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        height: 100vh;
+        background: rgba(2, 2, 5, 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+        transition: 0.4s ease;
+        z-index: 1001;
+    }
+
+    .nav-links.active { right: 0; }
+
+    /* 3. About Me Alignment Fix */
+    .about-card {
+        width: 90% !important;
+        margin: 0 auto !important;
+        padding: 25px !important;
+    }
+    
+    .about-card p {
+        text-align: left;
+        font-size: 1rem !important;
+        line-height: 1.6;
+    }
+
+    /* 4. Experience Timeline Alignment */
+    .experience-item {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        padding-left: 20px !important;
+        border-left: 2px solid var(--cyan);
+        margin-left: 15px !important;
+        margin-bottom: 40px !important;
+    }
+
+    .experience-date {
+        margin-bottom: 10px;
+        font-size: 0.8rem;
+        color: var(--cyan);
+    }
+
+    /* 5. Project Card Scaling Fix */
+    .project-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 0 20px 0 !important;
+        padding: 20px !important;
+        box-sizing: border-box;
+    }
+    
+    .project-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 20px;
+        padding: 0 15px;
+    }
+
+    /* 6. Hero "Drift" Tag Fix */
+    .floating-tag {
+        z-index: -1 !important; /* Prevents overlapping text */
+        pointer-events: none;
+        opacity: 0.4;
+    }
+}
 
     </style>
 </head>
@@ -918,16 +1026,14 @@ nav {
   <nav>
     <div class="container nav-container">
         <div class="logo">SELVINA<span>.SWARNA</span></div>
-        
-        <button class="menu-toggle" aria-label="Open Menu">
+        <button class="menu-toggle" aria-label="Toggle Navigation">
             <span></span>
             <span></span>
             <span></span>
         </button>
-
         <div class="nav-links">
             <a href="#about">About</a>
-            <a href="#history">History</a>
+            <a href="#history">Experience</a>
             <a href="#vault">Project Vault</a>
             <a href="#Certifications">Certifications</a>
             <a href="#stack">Technical Stack</a>
@@ -1476,36 +1582,33 @@ nav {
         });
     </script>
     <script>
-    // --- 1. CURSOR GLOW ENGINE ---
+    // 1. Cursor Glow Effect
     const glow = document.createElement('div');
     glow.className = 'cursor-glow';
     document.body.appendChild(glow);
 
     document.addEventListener('mousemove', (e) => {
-        glow.style.left = e.clientX + 'px';
-        glow.style.top = e.clientY + 'px';
+        glow.style.left = `${e.clientX}px`;
+        glow.style.top = `${e.clientY}px`;
     });
 
-    document.addEventListener('mouseleave', () => glow.style.opacity = '0');
-    document.addEventListener('mouseenter', () => glow.style.opacity = '1');
-
-    // --- 2. TOP-RIGHT HAMBURGER MENU ENGINE ---
+    // 2. Responsive Menu Logic
     const menuToggle = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('.nav-links');
     const body = document.body;
 
     menuToggle.addEventListener('click', () => {
-        const isActive = navLinks.classList.toggle('active');
+        const isOpened = navLinks.classList.toggle('active');
         
-        // Prevent background scroll when menu is open (Professional UX)
-        body.style.overflow = isActive ? 'hidden' : 'auto';
-        
-        // Animate the hamburger into an 'X'
+        // Disable body scroll when menu is active
+        body.style.overflow = isOpened ? 'hidden' : 'auto';
+
+        // Hamburger to X Animation
         const spans = menuToggle.querySelectorAll('span');
-        if (isActive) {
-            spans[0].style.transform = 'rotate(45deg) translate(5px, 6px)';
+        if (isOpened) {
+            spans[0].style.transform = 'rotate(45deg) translate(6px, 6px)';
             spans[1].style.opacity = '0';
-            spans[2].style.transform = 'rotate(-45deg) translate(5px, -7px)';
+            spans[2].style.transform = 'rotate(-45deg) translate(5px, -6px)';
         } else {
             spans[0].style.transform = 'none';
             spans[1].style.opacity = '1';
@@ -1513,20 +1616,18 @@ nav {
         }
     });
 
-    // Close menu and restore scroll when a link is clicked
+    // Close menu on link click
     document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', () => {
             navLinks.classList.remove('active');
-            body.style.overflow = 'auto'; // Restore scrolling
-            
-            // Reset Hamburger icon to original 3 lines
+            body.style.overflow = 'auto';
             const spans = menuToggle.querySelectorAll('span');
-            spans[0].style.transform = 'none';
+            spans.forEach(s => s.style.transform = 'none');
             spans[1].style.opacity = '1';
-            spans[2].style.transform = 'none';
         });
     });
 </script>
+
 
 </body>
 </html>
