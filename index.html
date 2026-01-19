@@ -1000,7 +1000,63 @@ h2 { font-size: clamp(1.8rem, 5vw, 3rem) !important; }
         opacity: 0.4;
     }
 }
+/* --- MANDATORY MOBILE ALIGNMENT --- */
+@media (max-width: 768px) {
+    /* 1. Project Card Scaling (Fixes "Covers whole screen" issue) */
+    .project-card {
+        width: 90% !important;
+        max-width: 350px !important; /* Forces a professional width on phone */
+        margin: 0 auto 25px auto !important;
+        padding: 20px !important;
+        font-size: 0.85rem !important; /* Smaller text for small screens */
+    }
 
+    /* 2. About Me Paragraph Alignment */
+    .about-card {
+        width: 85% !important;
+        margin: 0 auto !important;
+        text-align: left !important; /* Standard professional alignment */
+        padding: 20px !important;
+    }
+    
+    .about-card p {
+        line-height: 1.6;
+        margin-bottom: 15px;
+    }
+
+    /* 3. Experience Timeline Fix (Removes the "Messed Up" look) */
+    .experience-item {
+        display: flex;
+        flex-direction: column !important; /* Stacks date above content */
+        align-items: flex-start !important;
+        padding-left: 20px !important;
+        margin: 0 15px 30px 15px !important;
+        border-left: 2px solid var(--cyan); /* Solid vertical line */
+        position: relative;
+    }
+
+    .experience-date {
+        position: static !important; /* Pulls it out of the side margin */
+        margin-bottom: 5px;
+        font-size: 0.75rem;
+        font-weight: bold;
+        color: var(--cyan);
+    }
+
+    /* 4. Heading Font Size (Global Fix) */
+    h1 { font-size: 2.2rem !important; }
+    h2 { font-size: 1.8rem !important; }
+    .section-title { font-size: 1.5rem !important; margin-bottom: 20px; }
+
+    /* 5. Hamburger Position (Top-Right) */
+    .menu-toggle {
+        display: flex;
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 9999;
+    }
+}
     </style>
 </head>
 <body>
@@ -1026,7 +1082,7 @@ h2 { font-size: clamp(1.8rem, 5vw, 3rem) !important; }
   <nav>
     <div class="container nav-container">
         <div class="logo">SELVINA<span>.SWARNA</span></div>
-        <button class="menu-toggle" aria-label="Toggle Navigation">
+        <button class="menu-toggle">
             <span></span>
             <span></span>
             <span></span>
@@ -1035,12 +1091,16 @@ h2 { font-size: clamp(1.8rem, 5vw, 3rem) !important; }
             <a href="#about">About</a>
             <a href="#history">Experience</a>
             <a href="#vault">Project Vault</a>
+            <a href="#Technical Stack">Project Vault</a>
             <a href="#Certifications">Certifications</a>
-            <a href="#stack">Technical Stack</a>
             <a href="#contact">Contact</a>
         </div>
     </div>
 </nav>
+
+<section id="about" class="reveal">...</section>
+<section id="history" class="reveal">...</section>
+<section id="vault" class="reveal">...</section>
 
     
     <div class="hero-bg-keywords">
@@ -1582,45 +1642,25 @@ h2 { font-size: clamp(1.8rem, 5vw, 3rem) !important; }
         });
     </script>
     <script>
-    // 1. Cursor Glow Effect
-    const glow = document.createElement('div');
-    glow.className = 'cursor-glow';
-    document.body.appendChild(glow);
-
-    document.addEventListener('mousemove', (e) => {
-        glow.style.left = `${e.clientX}px`;
-        glow.style.top = `${e.clientY}px`;
-    });
-
-    // 2. Responsive Menu Logic
     const menuToggle = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('.nav-links');
-    const body = document.body;
 
-    menuToggle.addEventListener('click', () => {
-        const isOpened = navLinks.classList.toggle('active');
+    menuToggle.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevents browser from misinterpreting click
+        navLinks.classList.toggle('active');
         
-        // Disable body scroll when menu is active
-        body.style.overflow = isOpened ? 'hidden' : 'auto';
-
-        // Hamburger to X Animation
+        // Hamburger Animation
         const spans = menuToggle.querySelectorAll('span');
-        if (isOpened) {
-            spans[0].style.transform = 'rotate(45deg) translate(6px, 6px)';
-            spans[1].style.opacity = '0';
-            spans[2].style.transform = 'rotate(-45deg) translate(5px, -6px)';
-        } else {
-            spans[0].style.transform = 'none';
-            spans[1].style.opacity = '1';
-            spans[2].style.transform = 'none';
-        }
+        spans[0].style.transform = navLinks.classList.contains('active') ? 'rotate(45deg) translate(5px, 6px)' : 'none';
+        spans[1].style.opacity = navLinks.classList.contains('active') ? '0' : '1';
+        spans[2].style.transform = navLinks.classList.contains('active') ? 'rotate(-45deg) translate(5px, -7px)' : 'none';
     });
 
-    // Close menu on link click
+    // CRITICAL: Close menu on link click to fix "Reader Mode" bug
     document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', () => {
             navLinks.classList.remove('active');
-            body.style.overflow = 'auto';
+            // Reset hamburger
             const spans = menuToggle.querySelectorAll('span');
             spans.forEach(s => s.style.transform = 'none');
             spans[1].style.opacity = '1';
