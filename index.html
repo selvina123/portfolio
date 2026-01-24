@@ -84,6 +84,27 @@
     }
     .nav-links a:hover { color: var(--cyan); text-shadow: var(--neon-shadow); }
 
+
+ /* Mobile Menu */
+    .menu-toggle {
+        display: none; flex-direction: column; gap: 6px;
+        background: none; border: none; cursor: pointer;
+        position: fixed; top: 20px; right: 20px; z-index: 2000;
+    }
+    .menu-toggle span { width: 30px; height: 2px; background: var(--cyan); }
+    @media (max-width: 768px) {
+        .menu-toggle { display: flex; }
+        .nav-links {
+            position: fixed; top: 0; right: -100%;
+            width: 70%; height: 100vh; background: rgba(2, 2, 5, 0.98);
+            backdrop-filter: blur(20px);
+            flex-direction: column; justify-content: center; align-items: center;
+            gap: 30px; transition: 0.4s ease;
+        }
+        .nav-links.active { right: 0; }
+    }
+
+
     /* --- HERO SECTION --- */
     .hero-section {
         min-height: 100vh;
@@ -1545,6 +1566,13 @@ h2 { font-size: clamp(1.8rem, 5vw, 3rem) !important; }
     </footer>
 
     <script>
+
+
+const menuToggle = document.querySelector('.menu-toggle');
+const navLinks = document.querySelector('.nav-links');
+menuToggle.addEventListener('click', () => navLinks.classList.toggle('active'));
+
+
         // Reveal on Scroll Engine
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
